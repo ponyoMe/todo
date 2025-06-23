@@ -2,6 +2,7 @@ backend/.env
 backend/node_modules/
 backend/dist/
 
+frontend/.env
 frontend/node_modules/
 frontend/.pnp
 frontend/.pnp.js
@@ -11,6 +12,7 @@ frontend/.pnp.js
 
 # production
 frontend/build/
+frontend/src/todo/todopr.js
 
 # misc
 .DS_Store

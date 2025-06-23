@@ -2,19 +2,22 @@ import { useEffect, useState } from "react"
 import { CirclePlus, Check, Trash2, Pencil } from "lucide-react"
 import axios from "axios"
 
+const api = process.env.REACT_APP_API_URL
+
 export default function Todo(){
+     
     const [todos, setTodos] = useState([])
     const [input, setInput] = useState('')
 
     const fetchTodos  = async ()=>{
-        const res = await axios.get('http://localhost:4000/todos')
+        const res = await axios.get(api)
         setTodos(res.data)
     }
 
     const addTodo = async ()=>{
 
         if(input.trim()){
-            await axios.post('http://localhost:4000/todos', {
+            await axios.post(api, {
                 description: input.trim()
             })
             setInput('')
@@ -23,12 +26,12 @@ export default function Todo(){
     }
 
     const toggleTodo = async (id)=>{
-        await axios.patch(`http://localhost:4000/todos/${id}/toggle`)
+        await axios.patch(`${api}/${id}/toggle`)
         fetchTodos()
     }
 
     const deleteTodo = async (id)=>{
-        await axios.delete(`http://localhost:4000/todos/${id}`)
+        await axios.delete(`${api}/${id}`)
         fetchTodos()
     }
 
@@ -38,7 +41,7 @@ export default function Todo(){
     const saveEdit = async ()=>{
         if(!editText.trim()) return
 
-        await axios.patch(`http://localhost:4000/todos/${editIndex}`,{
+        await axios.patch(`${api}/${editIndex}`,{
             description : editText.trim()
            }
         )
